@@ -8,6 +8,8 @@ A skill that turns any goal into one short, paste-ready prompt. That prompt make
 
 Most agent output stops at "good enough" because nothing is holding it to a standard. This gives it a standard it cannot argue with.
 
+> The gauntlet loop is [Matt Shumer's](https://github.com/mshumer) idea. He wrote the original prompt and named the technique while building [Claude of Duty](https://github.com/mshumer/Claude-of-Duty). This repo packages that pattern as a reusable skill.
+
 ## Quick start
 
 ```
@@ -88,8 +90,16 @@ For any other agent, the skill swaps those two lines for plain instructions: kee
 - A soft critic. Give it a binary job, not a score.
 - A fixed round count. The exit is winning, or you calling it.
 
+## Credit
+
+The gauntlet loop technique is **[Matt Shumer's](https://github.com/mshumer)**. He built [Claude of Duty](https://github.com/mshumer/Claude-of-Duty), wrote the [original prompt](https://github.com/mshumer/Claude-of-Duty/blob/main/prompt.md), and named the loop. Every idea underneath this skill - the harsh critic, the blind comparison, the refusal to stop until the work wins - comes from that prompt.
+
+This repo is not the technique. It is a skill that writes a gauntlet loop prompt for you, for any goal, so you do not have to hand-write one each time.
+
+Related reading: [Anthropic on building effective agents](https://www.anthropic.com/engineering/building-effective-agents), which covers the evaluator pattern the loop is built on.
+
 ## License
 
 CC BY 4.0. Free to use with attribution.
 
-Created by Jay E at [RoboNuggets](https://robonuggets.com).
+Skill by Jay E at [RoboNuggets](https://robonuggets.com). Technique by Matt Shumer.
