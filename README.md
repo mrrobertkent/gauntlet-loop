@@ -12,20 +12,41 @@ Most agent output stops at "good enough" because nothing is holding it to a stan
 
 ## Quick start
 
-```
-git clone https://github.com/robonuggets/gauntlet-loop
-```
-
-Copy the skill folder into your project:
+**As a plugin.** Add this repo as a marketplace once, then install it wherever
+you want it:
 
 ```
-cp -r gauntlet-loop/.claude/skills/gauntlet-loop your-project/.claude/skills/
+/plugin marketplace add robonuggets/gauntlet-loop
+/plugin install gauntlet-loop@gauntlet-loop
 ```
+
+Pick the scope when you install: `user` puts it in every project, `project`
+commits it so your team gets it too, `local` keeps it to your machine. Updates
+come with `/plugin update gauntlet-loop`. Invoke it as
+`/gauntlet-loop:gauntlet-loop`, since plugin skills are namespaced.
+
+### Already copied the skill in by hand?
+
+Install the plugin, then run:
+
+```
+/gauntlet-loop:migrate
+```
+
+It finds every hand-copied copy on your machine, replaces each with a plugin
+install **at the same scope**, and keeps whichever ones you had switched off
+switched off. It shows you the full list before touching anything, and it leaves
+alone any copy you have edited.
+
+Worth doing rather than ignoring: a loose copy and a plugin copy do not override
+each other. Claude Code namespaces the plugin one, so you end up with both
+`/gauntlet-loop` and `/gauntlet-loop:gauntlet-loop` live, and the loose one never
+updates.
 
 Then in your agent:
 
 ```
-/gauntlet-loop build me a pricing page for my SaaS
+/gauntlet-loop:gauntlet-loop build me a pricing page for my SaaS
 ```
 
 It offers you 2 or 3 quality bars to aim at, you pick one, and it hands back a single prompt you paste into a fresh session.
@@ -33,11 +54,24 @@ It offers you 2 or 3 quality bars to aim at, you pick one, and it hands back a s
 ## What's included
 
 ```
-.claude/skills/gauntlet-loop/
-└── SKILL.md      # the whole skill, one file
+skills/
+├── gauntlet-loop/
+│   └── SKILL.md      # the whole skill, still one file
+└── migrate/
+    └── SKILL.md      # /gauntlet-loop:migrate
+.claude-plugin/
+├── plugin.json       # plugin manifest
+└── marketplace.json  # this repo is its own marketplace
+bin/                  # migration tool, one build per platform
+migrate/              # its source
+CHANGELOG.md
 README.md
-LICENSE           # CC BY 4.0
+LICENSE               # CC BY 4.0
 ```
+
+The skill moved from `.claude/skills/gauntlet-loop/` to `skills/gauntlet-loop/`,
+which is where Claude Code resolves a plugin's skills, and the invocation gained
+the plugin namespace.
 
 ## How it works
 

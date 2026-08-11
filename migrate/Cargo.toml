@@ -1,0 +1,21 @@
+[package]
+name = "gauntlet-loop-migrate"
+version = "1.0.0"
+edition = "2021"
+description = "Replaces hand-copied installs of the gauntlet-loop skill with the plugin, preserving enabled/disabled state."
+license = "CC-BY-4.0"
+repository = "https://github.com/robonuggets/gauntlet-loop"
+
+[[bin]]
+name = "gauntlet-loop-migrate"
+path = "src/main.rs"
+
+[dependencies]
+serde_json = { version = "1", features = ["preserve_order"] } # keeps user key order
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

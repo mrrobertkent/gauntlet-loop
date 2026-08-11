@@ -1,0 +1,32 @@
+{
+  "name": "gauntlet-loop",
+  "description": "The gauntlet loop skill, installable as a Claude Code plugin.",
+  "owner": {
+    "name": "Jay E",
+    "url": "https://robonuggets.com"
+  },
+  "metadata": {
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "gauntlet-loop",
+      "source": "./",
+      "version": "1.0.0",
+      "description": "Turns any goal into one short, paste-ready prompt that makes your agent set a real quality bar, run builder and critic pairs, compare blind, and loop until it wins.",
+      "author": {
+        "name": "Jay E",
+        "url": "https://robonuggets.com"
+      },
+      "license": "CC-BY-4.0",
+      "homepage": "https://github.com/robonuggets/gauntlet-loop",
+      "keywords": [
+        "prompt-engineering",
+        "evaluator",
+        "critic",
+        "quality-bar",
+        "agent-loop"
+      ]
+    }
+  ]
+}
