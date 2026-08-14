@@ -1,4 +1,4 @@
 # Rust build artifacts for the migration tool
-/migrate/target/
+/skills/migrate/scripts/target/
 
 .DS_Store

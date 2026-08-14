@@ -56,14 +56,16 @@ It offers you 2 or 3 quality bars to aim at, you pick one, and it hands back a s
 ```
 skills/
 ├── gauntlet-loop/
-│   └── SKILL.md      # the whole skill, still one file
+│   ├── SKILL.md      # the whole skill, still one file
+│   └── scripts/
+│       └── resolve-bars.sh   # finds your configured bars directory
 └── migrate/
-    └── SKILL.md      # /gauntlet-loop:migrate
+    ├── SKILL.md      # /gauntlet-loop:migrate
+    └── scripts/      # the migration tool's source
 .claude-plugin/
 ├── plugin.json       # plugin manifest
 └── marketplace.json  # this repo is its own marketplace
-bin/                  # migration tool, one build per platform
-migrate/              # its source
+bin/                  # migration tool, one build per platform, added to PATH
 CHANGELOG.md
 README.md
 LICENSE               # CC BY 4.0
@@ -93,6 +95,37 @@ The skill will not accept a vague bar. It checks three things before it writes a
 - **Named.** A specific thing, not a category.
 - **Fetchable.** The critic can screenshot it, read it, run it, or open it. If the agent cannot get the reference, it hallucinates the comparison and approves everything.
 - **Comparable.** Both can sit side by side and a judge can pick one.
+
+## When there is nothing to copy
+
+An outside reference only exists for work someone has already shipped. Internal
+tools, billing rules, anything built for one business — there is no product to
+hold it against, and that is the normal case rather than the exception. With no
+reference, the critic invents a standard and approves work against it.
+
+Your own spec is the bar in that case. It has to be judgeable to work: a critic
+must be able to read a line and answer pass or fail without deciding anything.
+Vision docs and prose fail that test, so the skill offers to turn them into a
+pass/fail checklist first rather than looping against prose.
+
+Where both exist, use both. The spec says *what*, an outside product says *how
+good*, and they catch different failures — work can meet every requirement and
+still feel cheap.
+
+The skill never goes looking for your spec. Projects organise these too
+differently for guessing to be safe, and a wrong bar is worse than no bar
+because the loop still exits confidently. It uses what you give it, or asks.
+
+If you keep specs in one place, point at it once and skip the question. Create
+`.claude/gauntlet-loop.conf` in your project:
+
+```
+bars_dir = docs/specs
+```
+
+Relative paths resolve against the project root. The file belongs to your
+project rather than to the plugin, so updating the plugin never touches it.
+Without it, the skill just asks.
 
 ## Examples
 
